@@ -120,15 +120,7 @@ a{color:inherit;text-decoration:none}
 }
 .topbar-in{max-width:900px;margin:0 auto;padding:0 1rem;height:62px;display:flex;align-items:center;gap:.6rem}
 .brand{display:flex;align-items:center;gap:.65rem;margin-right:auto;min-width:0}
-.mark{
-  width:36px;height:36px;flex-shrink:0;border-radius:11px;
-  display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);overflow:hidden;
-}
-.mark img{width:100%;height:100%;object-fit:cover;display:block}
-.mark.mark-fallback{background:var(--ink-fill);color:var(--on-ink);font-weight:800;font-size:13px;font-family:'Inter Tight',sans-serif}
 .brand-name{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:14.5px;letter-spacing:-.2px;line-height:1.2;white-space:nowrap}
-.brand-sub{font-size:10.5px;color:var(--text-3);line-height:1.2}
-@media(max-width:520px){.brand>span:not(.mark){display:none}}
 .icon-btn{
   width:36px;height:36px;flex-shrink:0;border-radius:var(--radius-pill);
   border:1px solid var(--border-strong);background:var(--surface);color:var(--text-2);
@@ -465,13 +457,7 @@ td input::placeholder{color:var(--placeholder)}
 <header class="topbar">
   <div class="topbar-in">
     <a class="brand" href="/">
-      <span class="mark" aria-hidden="true">
-        <img src="/assets/logo%20sawah.png" alt="">
-      </span>
-      <span>
-        <span class="brand-name" style="display:block">SAWAH STUDIO</span>
-        <span class="brand-sub">Fresh made by people of sawah</span>
-      </span>
+      <span class="brand-name">SAWAH STUDIO</span>
     </a>
 
     <button class="icon-btn" onclick="showFlow()" aria-label="Buka panduan" title="Panduan membuat invoice">
@@ -749,7 +735,7 @@ let activePayMethod = 'Transfer Bank';
 /* ── DATA BISNIS (logo, nama, lokasi, telepon, website) ── */
 const BIZ_KEY = 'sawah-biz-data';
 let bizData = {
-  logo: '/assets/logo%20sawah.png',
+  logo: '',
   name: 'SAWAH STUDIO',
   location: '',
   phone: '+62 858 1080 3909',
@@ -773,11 +759,6 @@ function saveBizData(){
     }catch(e2){}
   }
 }
-function getInitials(name){
-  const words = String(name||'').trim().split(/\s+/).filter(Boolean).slice(0,2);
-  const s = words.map(w=>w[0].toUpperCase()).join('');
-  return s || 'SB';
-}
 function renderLogoPreview(){
   const el = document.getElementById('logoPreview');
   const btn = document.getElementById('removeLogoBtn');
@@ -790,16 +771,6 @@ function renderLogoPreview(){
   }
 }
 function updateBrand(){
-  const markEl = document.querySelector('.mark');
-  if(bizData.logo){
-    markEl.classList.remove('mark-fallback');
-    markEl.innerHTML = `<img src="${bizData.logo}" alt="">`;
-  } else {
-    markEl.classList.add('mark-fallback');
-    markEl.textContent = getInitials(bizData.name);
-  }
-  document.querySelector('.brand-name').textContent = bizData.name || 'Nama Bisnis';
-  document.querySelector('.brand-sub').textContent = bizData.location || bizData.website || bizData.phone || '';
   document.title = `Kalkulator Invoice — ${bizData.name || 'Bisnis Anda'}`;
 }
 function resizeImageFile(file, maxDim, cb){
