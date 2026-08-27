@@ -1374,7 +1374,7 @@ async function submitGateAuth(){
   btn.disabled = true;
   const { data, error } = gateMode === 'login'
     ? await sb.auth.signInWithPassword({ email, password })
-    : await sb.auth.signUp({ email, password });
+    : await sb.auth.signUp({ email, password, options:{ emailRedirectTo: window.location.origin } });
   btn.disabled = false;
 
   if(error){ errEl.textContent = error.message; return; }
