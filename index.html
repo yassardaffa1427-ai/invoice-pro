@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="theme-color" content="#F7F5F1">
 <link rel="icon" type="image/png" href="/assets/logo-pro.png">
-<title>Kalkulator Invoice — Sawah Studio</title>
+<title>Kalkulator Invoice — Kirim.in</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
@@ -462,8 +462,8 @@ td input::placeholder{color:var(--placeholder)}
 <header class="topbar">
   <div class="topbar-in">
     <a class="brand" href="/">
-      <span class="brand-name">SAWAH STUDIO</span>
-      <span class="brand-badge">PRO</span>
+      <span class="brand-name">KIRIM.IN</span>
+      <span class="brand-badge">BETA</span>
     </a>
 
     <button class="icon-btn" onclick="showFlow()" aria-label="Buka panduan" title="Panduan membuat invoice">
@@ -739,13 +739,13 @@ let uid = 0;
 let activePayMethod = 'Transfer Bank';
 
 /* ── DATA BISNIS (logo, nama, lokasi, telepon, website) ── */
-const BIZ_KEY = 'sawah-biz-data';
+const BIZ_KEY = 'kirimin-biz-data';
 let bizData = {
   logo: '',
-  name: 'SAWAH STUDIO',
+  name: '',
   location: '',
-  phone: '+62 858 1080 3909',
-  website: 'y26site.framer.ai'
+  phone: '',
+  website: ''
 };
 
 function loadBizData(){
@@ -777,7 +777,7 @@ function renderLogoPreview(){
   }
 }
 function updateBrand(){
-  document.title = `Kalkulator Invoice — ${bizData.name || 'Bisnis Anda'}`;
+  document.title = `Kalkulator Invoice — Kirim.in`;
 }
 function resizeImageFile(file, maxDim, cb){
   const reader = new FileReader();
@@ -1226,8 +1226,8 @@ function generatePrintContent(){
       ` : ''}
 
       <div class="print-sign">
-        <p>Terima kasih telah mempercayai kami.</p>
-        <p>Invoice ini dibuat secara digital.</p>
+        <p>Terima kasih telah mempercayai layanan kami.</p>
+        <p style="margin-top:.35rem;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;opacity:.6">Kirim.in by Sawah Studio</p>
       </div>
     </div>
   `;
