@@ -464,6 +464,48 @@ td input::placeholder{color:var(--placeholder)}
   .print-table tr{page-break-inside:avoid}
   .print-summary,.print-notes{page-break-inside:avoid}
 }
+
+/* ─────────── ANIMASI SEDERHANA ───────────
+   Dibungkus prefers-reduced-motion supaya user yang minta gerakan
+   minim di sistemnya tidak dipaksa lihat animasi ini. */
+@media (prefers-reduced-motion: no-preference){
+  @keyframes fadeInUp{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:none}
+  }
+  @keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+  }
+  @keyframes modalPop{
+    from{opacity:0;transform:scale(.96) translateY(8px)}
+    to{opacity:1;transform:none}
+  }
+
+  /* Entrance halaman: kop lalu tiap card muncul berurutan */
+  .page-head{animation:fadeInUp .5s cubic-bezier(.16,1,.3,1) both}
+  .app > .card{animation:fadeInUp .5s cubic-bezier(.16,1,.3,1) both}
+  .app > .card:nth-of-type(2){animation-delay:.06s}
+  .app > .card:nth-of-type(3){animation-delay:.12s}
+  .app > .card:nth-of-type(4){animation-delay:.18s}
+  .app > .card:nth-of-type(5){animation-delay:.24s}
+  .app > .card:nth-of-type(6){animation-delay:.3s}
+
+  /* Kartu terasa hidup saat disentuh */
+  .card{transition:transform .2s ease,box-shadow .2s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+
+  /* Modal & preview cetak masuk dengan pop lembut, bukan langsung muncul */
+  .modal-overlay.active .modal-content{animation:modalPop .28s cubic-bezier(.16,1,.3,1)}
+  .print-modal-overlay.active .print-modal-content{animation:modalPop .28s cubic-bezier(.16,1,.3,1)}
+
+  /* Gerbang login: kartu masuk dari bawah, tiap ganti tampilan fade halus */
+  .auth-gate-card{animation:fadeInUp .45s cubic-bezier(.16,1,.3,1) both}
+  #gateChecking,#gateLoggedOut,#gatePending{animation:fadeIn .35s ease}
+
+  /* Ikon di topbar sedikit mengecil saat ditekan, terasa lebih responsif */
+  .icon-btn:active{transform:scale(.92)}
+}
 </style>
 </head>
 <body>
